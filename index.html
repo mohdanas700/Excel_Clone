@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Excel Clone</title>
+</head>
+<body>
+    <div class="container"> 
+        <div class="title-bar">First heading</div>
+        <div class="menu-bar">
+            <div class="menu-file menu-item">File</div>
+            <div class="menu-home menu-item selected">Home</div>
+            <div class="menu-insert menu-item">Insert</div>
+            <div class="menu-layout menu-item">Layout</div>
+            <div class="menu-help menu-item">Help</div>
+        </div>
+        <div class="menu-icon-bar">
+            <div class="material-icons menu-icon icon-cut">content_cut</div>
+            <div class="material-icons menu-icon icon-copy">content_copy</div>
+            <div class="material-icons menu-icon icon-paste">content_paste</div>
+            <select name="" class="selecctor font-family-selector">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Calibri">Calibri</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Segoe UI">Segoe UI</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Palatino Linotype">Palatino Linotype</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+                <option value="Century Gothic">Century Gothic</option>
+                <option value="Book Antiqua">Book Antiqua</option>
+                <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+            </select>
+            <select name="" class="selecctor font-size-selector">
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
+                <option value="28">28</option>
+                <option value="30">30</option>
+                <option value="32">32</option>
+                <option value="34">34</option>                    
+            </select>
+            <div class="material-icons menu-icon icon-bold">format_bold</div>
+            <div class="material-icons menu-icon icon-italic">format_italic</div>
+            <div class="material-icons menu-icon icon-underline">format_underline</div>
+            <div class="material-icons menu-icon icon-align-left">format_align_left</div>
+            <div class="material-icons menu-icon icon-align-center">format_align_center</div>
+            <div class="material-icons menu-icon icon-align-right">format_align_right</div>
+            <div class="material-icons menu-icon icon-color_fill">format_color_fill</div>
+            <div class="material-icons menu-icon icon-color_text">format_color_text</div>
+        </div>  
+        <div class="formula-bar"></div>
+        <div class="data-container">
+            <div class="select-all"></div>
+            <div class="column-name-container"></div>
+            <div class="row-name-container"></div>
+            <div class="input-cell-container"></div>
+        </div>
+        <div class="sheet-bar">
+            <div class="scroll-bar">
+                <div class="material-icons icon-left-scroll">arrow_left</div>
+                <div class="material-icons icon-right-scroll">arrow_right</div>
+            </div>
+            <div class="material-icons icon-add">add_circle</div>
+            <div class="sheet-tab-container">
+                <div class="sheet-tab">Sheet1</div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
