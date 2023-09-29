@@ -31,7 +31,7 @@ body {
     padding-left: 10px;
     padding-right: 10px ;
     color: #fff;
-    font-size: 18;
+    font-size: 18px;
     display: flex;
     align-items: center;
 }
@@ -73,6 +73,7 @@ body {
 
 .font-family-selector {
     width: 150px;
+    font-family: 'Noto Sans';
 }
 
 .selector {
@@ -166,6 +167,7 @@ body {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid lightgray;
+    font-weight: bold;
 }
 
 .input-cell-container {
@@ -185,6 +187,7 @@ body {
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     outline-color: #107c41;
+    /* // need to do s */
 }
 
 .input-cell.selected {
@@ -208,6 +211,7 @@ body {
 }
 
 .sheet-bar {
+    /* need to do */
     height: 4vh;
     display: flex;
     align-items: center;
@@ -221,13 +225,15 @@ body {
 }
 
 .icon-left-scroll:hover, .icon-right-scroll:hover {
-    background-color: lightgrey;
+    background-color: lightgray;
     cursor: pointer;
 }
 
 .icon-add {
     color: #107c41;
     width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
 }  
 
 .icon-add:hover {
@@ -239,6 +245,7 @@ body {
     border: 1px solid lightgray;
     width: calc(100vw - 110px);
     /* width: 100%; */
+    display: flex;
 }
 
 .sheet-tab {
