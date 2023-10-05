@@ -1,11 +1,11 @@
 body {
     margin: 0;
     overflow: hidden;  /* using oveflow will hide scroll bar */
+    font-size: 14px;
 }
 
 * {
     box-sizing: border-box;  /* using box-sizing bordr & padding includes in total size of page  */
-    font-size: 14;
 } 
 
 .container {
@@ -188,6 +188,8 @@ body {
     border-bottom: 1px solid lightgray;
     outline-color: #107c41;
     /* // need to do s */
+    /* font-size: 14px;
+    font-family: 'Noto Sans'; */
 }
 
 .input-cell.selected {
@@ -216,6 +218,14 @@ body {
     display: flex;
     align-items: center;
 }
+
+.scroll-bar {
+    /* this will make sheet bar button horizontal */
+    display: flex; 
+    align-items: center; 
+}
+
+
 .scroller {
     width: 70px;
 }
@@ -260,6 +270,16 @@ body {
     border-right:1px solid lightgray ;       
 }
 
+.sheet-tab.selected {
+    border-bottom: 4px solid #107c41;
+}
+
 .sheet-tab:hover {
-    cursor:default;
+    cursor:pointer;
+    background-color: lightgray;
+}
+
+.sheet-tab.selected:hover {
+    cursor: default;
+    background-color: #fff;
 }

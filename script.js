@@ -1,3 +1,23 @@
+let defaultProperties = {
+    text: "",
+    "font-weight": "",
+    "font-style": "",
+    "text-decoration": "",
+    "text-align": "left",
+    "background-color": "#ffffff",
+    "color": "#000000",
+    "font-family": "Noto Sans",
+    "font-size": "14px"
+}
+
+let cellData = {
+    "Sheet1": {}
+}
+
+let selectedSheet = "Sheet1";
+let totalSheets = 1;
+
+
 $(document).ready(function(){
     // this block of code executes,after borwser loads.
 
@@ -106,17 +126,37 @@ $(document).ready(function(){
                     $(`#row-${rowId}-col-${colId+1}`).addClass("left-cell-selected");
                 }
             }
-            // Add the 'selected' class to the current cell.
-            $(this).addClass("selected");
         }
         else {
             // If Ctrl key is not pressed, remove 'selected' class from all other selected cells.
             $(".input-cell.selected").removeClass("selected");
-
-            // Add the 'selected' class to the current cell.
-            $(this).addClass("selected");
         }
+        
+        // Add the 'selected' class to the current cell.
+        $(this).addClass("selected");
+        changeHeader(this);
     });
+
+
+    function changeHeader(ele) {
+        let [rowId, colId] = getRowCol(ele);
+        let cellInfo = defaultProperties;
+        if (cellData[selectedSheet][rowId] && cellData[selectedSheet][rowId][colId]) {
+            cellInfo = cellData[selectedSheet][rowId][colId]
+        }
+        cellInfo["font-weight"] ? $(".icon-bold").addClass("selected") : $(".icon-bold").removeClass("selected");
+        cellInfo["font-style"] ? $(".icon-italic").addClass("selected") : $(".icon-italic").removeClass("selected");
+        cellInfo["font-decoration"] ? $(".icon-underline").addClass("selected") : $(".icon-underline").removeClass("selected");
+        let alignment = cellInfo["text-align"];
+        $(".align-icon.selected").removeClass("selected");
+        $(".icon-align-" + alignment).addClass("selected");
+        $(".background-color-picker").val(cellInfo["background-color"]);
+        $(".text-color-picker").val(cellInfo["color"]);
+        $(".font-family-selector").val(cellInfo["font-family"]);
+        $(".font-family-selector").css("font-family", cellInfo["font-family"]);
+        $(".font-size-selector").val(cellInfo["font-size"]);
+    
+    }
 
     $(".input-cell").dblclick(function () {
         // This event handler is triggered when an input cell is double-clicked.
@@ -168,27 +208,74 @@ function getRowCol(ele) {
     return [rowId, colId]
 };
 
-function updateCell(property,value) {
+function updateCell(property,value,defaultPossible) {
     // This function updates the specified CSS property with the given value for all selected cells.
     $(".input-cell.selected").each(function(){
         $(this).css(property,value);
+        let [rowId,colId] = getRowCol(this);
+        if(cellData[selectedSheet][rowId]) {
+            if(cellData[selectedSheet][rowId][colId]) {
+                cellData[selectedSheet][rowId][colId][property] = value;
+            } else {
+                cellData[selectedSheet][rowId][colId] = {...defaultProperties};
+                cellData[selectedSheet][rowId][colId][property] = value;
+            }
+        } else {
+            cellData[selectedSheet][rowId] = {};
+            cellData[selectedSheet][rowId][colId] = {...defaultProperties};
+            cellData[selectedSheet][rowId][colId][property] = value;
+        }
+        if(defaultPossible && (JSON.stringify(cellData[selectedSheet][rowId][colId]) === JSON.stringify(defaultProperties))) {
+            delete cellData[selectedSheet][rowId][colId];
+            if(Object.keys(cellData[selectedSheet][rowId]).length == 0) {
+                delete cellData[selectedSheet][rowId];
+            }
+        }
     });
+    console.log(cellData);
 };
 
 $(".icon-bold").click(function() {
    // This event handler toggles the "font-weight" property for selected cells when the bold icon is clicked. 
     if($(this).hasClass("selected")) {
-        updateCell("font-weight","bold",true);
+        updateCell("font-weight","",true);
     }
     else {
-        updateCell("font-weight","",false);
+        updateCell("font-weight","bold",false);
     }
 });
 
-// $(".icon-bold").click(function() {
-//     if($(this).hasClass("selected")) {
-//         updateCell("font-weight","",true);
-//     } else {
-//         updateCell("font-weight","bold",false);
-//     }
-// });
+$(".icon-italic").click(function() {
+    if($(this).hasClass("selected")) {
+        updateCell("font-style","",true);
+    } else {
+        updateCell("font-style","italic",false);
+    }
+});
+
+$(".icon-underline").click(function() {
+    if($(this).hasClass("selected")) {
+        updateCell("text-decoration","",true);
+    } else {
+        updateCell("text-decoration","underline",false);
+    }
+});
+
+$(".icon-align-left").click(function() {
+    if(!$(this).hasClass("selected")) {
+        updateCell("text-align","left",true);
+    }
+});
+
+$(".icon-align-center").click(function() {
+    if(!$(this).hasClass("selected")) {
+        updateCell("text-align","center",true);
+    }
+});
+
+$(".icon-align-right").click(function() {
+    if(!$(this).hasClass("selected")) {
+        updateCell("text-align","right",true);
+    }
+});
+
