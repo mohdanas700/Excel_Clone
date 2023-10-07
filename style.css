@@ -89,6 +89,28 @@ body {
     background-color: lightgray;
 }
 
+.icon-color_fill, .icon-color_text{
+    position: relative;
+}
+
+.color-picker {
+    position: absolute;
+    width: 26px;
+    height: 12px;
+    border: none;
+    padding: 0;
+    top: 25px;
+    left: 9px;
+    cursor: pointer;
+} 
+
+
+
+
+
+
+
+
 .formula-bar {
     height: 5vh;
     display: flex;
@@ -187,9 +209,8 @@ body {
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     outline-color: #107c41;
-    /* // need to do s */
-    /* font-size: 14px;
-    font-family: 'Noto Sans'; */
+    font-size: 14px;
+    font-family: 'Noto Sans';
 }
 
 .input-cell.selected {
@@ -258,8 +279,7 @@ body {
     display: flex;
 }
 
-.sheet-tab {
-    border-bottom: 4px solid #107c41;
+.sheet-tab { 
     padding-left: 10px;
     padding-right: 10px;
     display: flex;

@@ -16,7 +16,7 @@ let cellData = {
 
 let selectedSheet = "Sheet1";
 let totalSheets = 1;
-
+let lastlyAddedSheet = 1;
 
 $(document).ready(function(){
     // this block of code executes,after borwser loads.
@@ -150,7 +150,7 @@ $(document).ready(function(){
         let alignment = cellInfo["text-align"];
         $(".align-icon.selected").removeClass("selected");
         $(".icon-align-" + alignment).addClass("selected");
-        $(".background-color-picker").val(cellInfo["background-color"]);
+        $(".background-color-picker").val(cellInfo["background-color"]); //two way header change
         $(".text-color-picker").val(cellInfo["color"]);
         $(".font-family-selector").val(cellInfo["font-family"]);
         $(".font-family-selector").css("font-family", cellInfo["font-family"]);
@@ -181,7 +181,7 @@ $(document).ready(function(){
         // Disable content editing for the currently selected input cell.
         $(".input-cell.selected").attr("contenteditable","false");
 
-        // Update the cell content with the text entered by the user.
+        // Update the cell content(cellinfo) with the text entered by the user.
         updateCell("text", $(this).text());
     })
 
@@ -279,3 +279,92 @@ $(".icon-align-right").click(function() {
     }
 });
 
+$(".color-fill-icon").click(function() {
+    $(".background-color-picker").click();
+});
+
+$(".color-fill-text").click(function() {
+    $(".text-color-picker").click();
+});
+
+$(".background-color-picker").change(function() {
+    updateCell('background-color', $(this).val());
+});
+
+$(".text-color-picker").change(function() {
+    updateCell('color', $(this).val());
+});
+
+$(".font-family-selector").change(function() {
+    updateCell('font-family',$(this).val());
+    $(".font-family-selector").css("font-family", $(this).val());
+});
+
+$(".font-size-selector").change(function() {
+    updateCell('font-size',$(this).val());
+});
+
+function emptySheet() {
+    let sheetInfo = cellData[selectedSheet];
+    for(let i of Object.keys(sheetInfo)) {
+        for(let j of Object.keys(sheetInfo[i])) {
+            $(`#row-${i}-col-${j}`).text("");
+            $(`#row-${i}-col-${j}`).css("background-color", "#ffffff");
+            $(`#row-${i}-col-${j}`).css("color", "#000000");
+            $(`#row-${i}-col-${j}`).css("text-align", "left");
+            $(`#row-${i}-col-${j}`).css("font-weight", "");
+            $(`#row-${i}-col-${j}`).css("font-style", "");
+            $(`#row-${i}-col-${j}`).css("text-decoration", "");
+            $(`#row-${i}-col-${j}`).css("font-family", "Noto Sans");
+            $(`#row-${i}-col-${j}`).css("font-size", "14px");
+        }
+    }
+}
+
+function loadSheet()  {
+    let sheetInfo = cellData[selectedSheet];
+    for(let i of Object.keys(sheetInfo)) {
+        for(let j of Object.keys(sheetInfo[i])) {
+            let cellInfo  = cellData[selectedSheet][i][j];
+            $(`#row-${i}-col-${j}`).text(cellInfo["text"]);
+            $(`#row-${i}-col-${j}`).css("background-color", cellInfo["background-color"]);
+            $(`#row-${i}-col-${j}`).css("color", cellInfo["color"]);
+            $(`#row-${i}-col-${j}`).css("text-align", cellInfo["text-align"]);
+            $(`#row-${i}-col-${j}`).css("font-weight", cellInfo["font-weight"]);
+            $(`#row-${i}-col-${j}`).css("font-style", cellInfo["font-style"]);
+            $(`#row-${i}-col-${j}`).css("text-decoration", cellInfo["text-decoration"]);
+            $(`#row-${i}-col-${j}`).css("font-family", cellInfo["font-family"]);
+            $(`#row-${i}-col-${j}`).css("font-size", cellInfo["font-size"]);
+        }
+    }   
+}
+
+$(".icon-add").click(function() {
+    emptySheet();
+    $(".sheet-tab.selected").removeClass("selected");
+    let sheetName = "Sheet" + (lastlyAddedSheet + 1);
+    cellData[sheetName] = {};
+    totalSheets += 1;
+    lastlyAddedSheet += 1;
+    selectedSheet = sheetName;
+    $(".sheet-tab-container").append(`<div class="sheet-tab selected">${sheetName}</div>`);
+    $(".sheet-tab.selected").click(function() {
+        if (!$(this).hasClass("selected")) {
+            selectSheet(this);
+        }
+    })
+});
+
+$(".sheet-tab").click(function() {
+    if (!$(this).hasClass("selected")) {
+        selectSheet(this);
+    }
+})
+
+function selectSheet(ele) {
+    $(".sheet-tab.selected").removeClass("selected");
+    $(ele).addClass("selected");
+    emptySheet();
+    selectedSheet = $(ele).text();
+    loadSheet();
+}
