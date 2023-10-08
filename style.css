@@ -10,6 +10,7 @@ body {
 
 .container {
     height: 100vh;
+    position: relative;
 }
  
 .title-bar {
@@ -302,4 +303,69 @@ body {
 .sheet-tab.selected:hover {
     cursor: default;
     background-color: #fff;
+}
+
+.sheet-options-modal {
+    position: absolute;
+    background-color: #fff;
+    height: 60px;
+    width: 70px;
+    bottom: 4vh;
+    box-shadow: 0 0 3px 1px lightgray;
+}
+
+.sheet-rename, .sheet-delete {
+    height: 30px;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sheet-rename:hover, .sheet-delete:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.sheet-rename-modal {
+    position: absolute;
+    background-color: #fff;
+    height: 180px;
+    width: 300px;
+    top: calc(100vh / 2 - 90px);
+    left: calc(100vw / 2 - 150px);
+    text-align: center;
+    box-shadow: 0 0 3px 1px lightgray;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.new-sheet-name {
+    height: 30px;
+    font-size: 18px;
+    outline-color: #107c41;
+}
+
+.submit-button {
+    cursor: pointer;
+    background-color: #107c41;
+    color: #fff;
+    padding: 7px;
+}
+
+.cancel-button {
+    cursor: pointer;
+    background-color: red;
+    padding: 7px;
 }
