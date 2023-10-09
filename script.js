@@ -471,6 +471,7 @@ $(".icon-paste").click(function() {
             }
         }
     }
+    
     if(cut) {
         cut = false;
         selectedCells = [];
